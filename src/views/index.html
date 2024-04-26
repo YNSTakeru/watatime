@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <a href="/code">認証コードを取得する</a>
+    </div>
+    <input type="password" id="code" />
+    <button id="auth">認証</button>
+    <div>
+      <a href="/logout">ログアウト</a>
+    </div>
+    <script>
+      const $authBtn = document.getElementById("auth");
+      const $code = document.getElementById("code");
+
+      fetch("/csrf-token")
+        .then((response) => response.json())
+        .then(({ csrfToken }) => {
+          $authBtn.addEventListener("click", () => {
+            fetch("/auth", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                "csrf-token": csrfToken,
+              },
+              body: JSON.stringify({ code: $code.value }),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                location.reload();
+              });
+          });
+        });
+    </script>
+  </body>
+</html>

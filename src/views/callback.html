@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Callback</title>
+  </head>
+  <body>
+    <h1>以下の文字列をコピーして下記URLに貼り付けてください</h1>
+    <p id="code"></p>
+    <button
+      onclick="navigator.clipboard.writeText(document.getElementById('code').textContent)"
+    >
+      コピー
+    </button>
+
+    <h2>URL</h2>
+    <div>
+      <a href="/">indexページ</a>
+    </div>
+
+    <script>
+      // URLからクエリパラメータを取得
+      const url = new URL(window.location.href);
+      const code = url.searchParams.get("code");
+
+      // コードを表示
+      document.getElementById("code").textContent = code;
+    </script>
+  </body>
+</html>
