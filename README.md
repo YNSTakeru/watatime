@@ -95,7 +95,6 @@ node src/server.js
     - 用途：`cookie`に保存している`access_token`を失効し、cookieから削除する
     - 必要なパラメータ：`access_token`,`CLIENT_ID`,`CLIENT_SECRET`
     - レスポンス：HTMLページ
-...
 
 
 
