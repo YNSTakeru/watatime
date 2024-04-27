@@ -59,17 +59,21 @@ node src/server.js
 
 - `/` (GET)
     - 用途：WakaTimeの認証コードを送信してaccess_tokenを取得する。access_tokenが妥当ならばcommitsが取得できるリンクを表示
-    - 必要なパラメータ：なし
+    - 必要なパラメータ：
+        - access_tokenがない場合
+            - なし
+        - access_tokenがある場合
+            - `access_token`
     - レスポンス：HTMLページ
 
 - `/code` (GET)
-    - 用途：認証コードを取得するかどうかを確認するページ
-    - 必要なパラメータ：なし
+    - 用途：認証コードを取得するかどうかを確認するページ`/get-code`で送信する`state`を生成する
+    - 必要なパラメータ：`CLIENT_ID`,`REDIRECT_URI`
     - レスポンス：HTMLページ
 
 - `/get-code` (GET)
     - 用途：認証コードを取得するためのURLにリダイレクトする
-    - 必要なパラメータ：なし
+    - 必要なパラメータ：`CLIENT_ID`, `SCOPE`, `response_type`,`state`,`REDIRECT_URI`
     - レスポンス：リダイレクト
 
 - `/response-code` (GET)
@@ -79,17 +83,17 @@ node src/server.js
 
 - `/auth` (POST)
     - 用途：`/`から`access_token`を取得するためにpostする
-    - 必要なパラメータ：認証コード
-    - レスポンス：access_token
+    - 必要なパラメータ：認証コード,`REDIRECT_URI`,`CLIENT_ID`,`CLIENT_SECRET`
+    - レスポンス：`access_token`,`refresh_token`
 
 - `/commits` (GET)
     - 用途：`commits`をjson形式で取得する
-    - 必要なパラメータ：なし
+    - 必要なパラメータ：`REPO`,`access_token`
     - レスポンス：commitsのjsonデータ
 
 - `/logout` (GET)
     - 用途：`cookie`に保存している`access_token`を失効し、cookieから削除する
-    - 必要なパラメータ：なし
+    - 必要なパラメータ：`access_token`,`CLIENT_ID`,`CLIENT_SECRET`
     - レスポンス：HTMLページ
 ...
 
