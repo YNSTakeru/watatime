@@ -24,3 +24,11 @@ REDIRECT_URI={{WakaTimeに登録したcAuthorized Redirect URIs}}
 SESSION_SECRET={{cryptoで生成したランダムな文字列}}
 REPO={{WakaTimeと連携しているProject}}
 ```
+
+## サーバー立ち上げ
+
+```bash
+node src/server.js
+```
+
+[https://localhost:3000](https://localhost:3000)にアクセス
